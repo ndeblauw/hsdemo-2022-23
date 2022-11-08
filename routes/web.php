@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+ray()->clearAll();
+ray('Hello from routing file')->blue();
+Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
