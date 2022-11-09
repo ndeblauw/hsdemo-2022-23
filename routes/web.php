@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 ray()->clearAll();
-ray('Hello from routing file')->blue();
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index']);
