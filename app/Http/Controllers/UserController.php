@@ -11,8 +11,6 @@ class UserController extends Controller
 
         $users = User::all();
 
-        ray($users);
-
         return view('users', compact('users'));
 
     }
