@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Navigation extends Component
@@ -25,6 +26,19 @@ class Navigation extends Component
      */
     public function render()
     {
+        $route = '/'.Str::of(request()->getUri())->afterLast('/');
+
+
+        foreach($this->menu as $key => $item) {
+            if($route === $item['url']) {
+                $this->menu[$key]['active'] = true;
+            } else {
+                $this->menu[$key]['active'] = false;
+            }
+        }
+
+        ray($this->menu)->orange();
+
         return view('components.navigation');
     }
 }
