@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 ray()->clearAll();
-Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
+Route::get('/', \App\Http\Controllers\WelcomeController::class)->name('welcome');
 
-Route::get('users', [\App\Http\Controllers\UserController::class, 'index']);
+
+Route::resource('users', \App\Http\Controllers\UserController::class);

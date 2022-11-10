@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    public function index(Request $request)
+    public function __invoke(Request $request)
     {
         $articles = Article::all();
 
