@@ -11,38 +11,14 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('users', compact('users'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
+        return view('users.index', compact('users'));
     }
 
     public function show($id)
     {
         $user = User::find($id);
 
-        return view('user', compact('user'));
+        return view('users.show', compact('user'));
 
-    }
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }
