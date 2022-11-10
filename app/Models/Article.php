@@ -13,4 +13,9 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class);
+    }
 }

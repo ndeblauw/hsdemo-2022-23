@@ -7,6 +7,12 @@
         </a>
     </div>
 
+    <div>
+        @foreach($article->keywords as $keyword)
+            <span class="mr-2 p-1 bg-teal-200 rounded">{{$keyword->name}}</span>
+        @endforeach
+    </div>
+
     {{$article->body}}
 
 </x-site-layout>
