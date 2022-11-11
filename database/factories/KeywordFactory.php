@@ -17,7 +17,7 @@ class KeywordFactory extends Factory
     public function definition()
     {
         return [
-            'name' => ucfirst( fake()->unique()->word()),
+            'name' => ucfirst(fake()->unique()->word()),
         ];
     }
 }

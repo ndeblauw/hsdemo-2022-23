@@ -18,7 +18,6 @@ class Footer extends Component
         $this->menu = config('hsdemo.menu');
     }
 
-
     /**
      * Get the view / contents that represent the component.
      *

@@ -20,8 +20,8 @@ class ArticleFactory extends Factory
             'title' => fake()->sentence(),
             'body' => fake()->realText(),
             'published_at' => fake()->dateTimeBetween('-2 weeks', 'now'),
-            'author_id' => fake()->numberBetween(1,10),
-            'tag_id' => fake()->numberBetween(1,10),
+            'author_id' => fake()->numberBetween(1, 10),
+            'tag_id' => fake()->numberBetween(1, 10),
         ];
     }
 }
