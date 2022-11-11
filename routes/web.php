@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', \App\Http\Controllers\WelcomeController::class)->name('welcome');
 Route::resource('users', \App\Http\Controllers\UserController::class);
 Route::resource('articles', \App\Http\Controllers\ArticleController::class);

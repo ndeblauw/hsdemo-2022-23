@@ -64,5 +64,4 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.show', $article->id);
     }
-
 }
