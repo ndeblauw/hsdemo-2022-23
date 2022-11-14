@@ -10,8 +10,13 @@ Route::resource('articles', \App\Http\Controllers\ArticleController::class);
 require __DIR__.'/auth.php';
 
 // LOGGED IN ROUTES ======================================================
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group( function() {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 // ADMIN ROUTES ===========================================================
+Route::middleware(['auth', 'isAdmin'])->group( function() {
+    // admin routes come here
+});
