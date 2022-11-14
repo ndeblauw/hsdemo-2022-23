@@ -12,11 +12,30 @@
                         @foreach($menu as $item)
                             <a href="{{$item['url']}}" class="@if($item['active']) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif px-3 py-2 rounded-md text-sm font-medium">{{$item['title']}}</a>
                         @endforeach
+                        @auth
+                            <a href="{{route('dashboard')}}" class="@if($item['active']) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        @endauth
                     </div>
                 </div>
             </div>
 
-            <div class="hidden md:block">
+            <div class="hidden md:block text-red-50">
+
+                @if (Route::has('login'))
+                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-50 dark:text-gray-500 underline">Home</a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-sm text-red-50 dark:text-gray-500 underline">Log in</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-red-50 dark:text-gray-500 underline">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+
+
                 <div class="ml-4 flex items-center md:ml-6">
                     <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span class="sr-only">View notifications</span>
