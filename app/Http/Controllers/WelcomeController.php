@@ -9,8 +9,6 @@ class WelcomeController extends Controller
 {
     public function __invoke(Request $request)
     {
-        ray('hello from controller');
-
         $articles = Article::latest()->take(4)->get();
         $articles_count = Article::count();
 
