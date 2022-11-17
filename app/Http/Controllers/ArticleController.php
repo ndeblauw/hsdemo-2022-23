@@ -9,7 +9,9 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::get();
+
+        $articles->load('author');
 
         return view('articles.index', compact('articles'));
     }
@@ -29,7 +31,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|min:5|max:255',
+            'title' => ['required','min:5','max:255'],
             'body' => 'required',
         ]);
 
@@ -56,7 +58,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         $validated = $request->validate([
-            'title' => 'required|min:5|max:255|ends_with:haha,hihi,.',
+            'title' => ['required','min:5','max:255'],
             'body' => 'required',
         ]);
 
