@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\User;
+use App\Notifications\WelcomeToNewUserNotification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -44,6 +46,9 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $latest_articles = Article::latest()->take(2)->get();
+        $user->notify(new WelcomeToNewUserNotification($latest_articles));
 
         event(new Registered($user));
 

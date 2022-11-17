@@ -11,7 +11,8 @@
                     <span class="font-semibold">{{$article->title}}</span>
                     <span class="text-sm">{{ Str::limit($article->body, 80)}}</span>
                 </a>
-                <a href="{{route('articles.edit', $article->id)}}">edit</a>
+                <a href="{{route('articles.edit', $article->id)}}">edit</a><br/>
+                {{$article->author->name}}
             </li>
         @endforeach
     </ul>
