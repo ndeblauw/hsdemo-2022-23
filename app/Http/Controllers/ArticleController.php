@@ -31,7 +31,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => ['required','min:5','max:255'],
+            'title' => ['required', 'min:5', 'max:255'],
             'body' => 'required',
         ]);
 
@@ -58,7 +58,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         $validated = $request->validate([
-            'title' => ['required','min:5','max:255'],
+            'title' => ['required', 'min:5', 'max:255'],
             'body' => 'required',
         ]);
 

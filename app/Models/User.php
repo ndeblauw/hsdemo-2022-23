@@ -48,7 +48,6 @@ class User extends Authenticatable
         });
 
         static::created(function ($user) {
-
             $profile = Profile::create([
                 'user_id' => $user->id,
             ]);
@@ -58,9 +57,7 @@ class User extends Authenticatable
             // Send out welcome newsletter to the user
 
             // Recalculate statistics
-
         });
-
     }
 
     public function profile()

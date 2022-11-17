@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -25,7 +24,7 @@ class WelcomeToNewUserNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $list = $this->articles->map( fn($a) => "<a href=\"".route('articles.show', $a->id)."\">$a->title</a>")->implode(', ');
+        $list = $this->articles->map(fn ($a) => '<a href="'.route('articles.show', $a->id)."\">$a->title</a>")->implode(', ');
 
         return (new MailMessage)
             ->greeting("Hello {$notifiable->name},")
