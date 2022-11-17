@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,4 +25,16 @@ class ArticleFactory extends Factory
             'tag_id' => fake()->numberBetween(1, 10),
         ];
     }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Article $article) {
+            $url = 'https://source.unsplash.com/random/1200x800';
+            $article
+                ->addMediaFromUrl($url)
+                ->toMediaCollection();
+        });
+    }
+
+
 }
