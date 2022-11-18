@@ -8,6 +8,7 @@
 
     <ul class="list-disc pl-5">
         @foreach($articles as $article)
+            @ray($article)
             <li>
                 <a href="{{route('articles.show', $article->id)}}">
                     <span class="font-semibold">{{$article->title}}</span>
@@ -15,7 +16,9 @@
                 </a>
                 <a href="{{route('home.articles.edit', $article->id)}}">edit</a><br/>
                 {{$article->author->name}}
+                <span>Keywords: {{$article->keywords->pluck('name')->implode(',')}}</span>
             </li>
+            @ray($article)
         @endforeach
     </ul>
 
