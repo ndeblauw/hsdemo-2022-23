@@ -1,7 +1,7 @@
 <x-site-layout title="Read {{$article->title}}">
 
     <div class="w-full">
-        <img src="{{$article->media->first()->getUrl('header')}}" class="w-full object-cover">
+        <img src="{{ $article->media->first()?->getUrl('header')}}" class="w-full object-cover">
     </div>
 
     <div class="mb-6 flex justify-end">

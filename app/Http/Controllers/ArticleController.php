@@ -8,18 +8,15 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::paginate();
-
-        $articles->load('author');
+        $articles = Article::with('author')->paginate();
 
         return view('articles.index', compact('articles'));
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
+        $article->load('media', 'author', 'keywords');
 
         return view('articles.show', compact('article'));
     }
-
 }
