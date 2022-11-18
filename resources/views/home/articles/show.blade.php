@@ -1,7 +1,14 @@
-<x-site-layout title="Read {{$article->title}}">
+<x-app-layout title="Read {{$article->title}}">
 
     <div class="mb-6 flex justify-end">
-        <a href="{{route('articles.edit', $article->id)}}" class="p-2 bg-green-500 text-green-50 rounded-lg">edit</a>
+        <a href="{{route('home.articles.edit', $article->id)}}" class="p-2 bg-green-500 text-green-50 rounded-lg">edit</a>
+    </div>
+
+
+    <h1 class="font-semibold">{{$article->title}}</h1>
+
+    <div class="w-full">
+        <img src="{{ $article->media->first()?->getUrl('thumbnail')}}" class="">
     </div>
 
 
@@ -22,4 +29,4 @@
 
     {!! $article->body !!}
 
-</x-site-layout>
+</x-app-layout>

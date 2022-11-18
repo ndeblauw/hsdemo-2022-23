@@ -17,10 +17,11 @@ class ArticleController extends Controller
         return view('home.articles.index', compact('articles'));
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
+        $article->load('media', 'author', 'keywords');
 
+        ray($article);
         return view('home.articles.show', compact('article'));
     }
 
@@ -45,9 +46,11 @@ class ArticleController extends Controller
             'tag_id' => 1,
         ]);
 
-        $article->addMediaFromRequest('image')->toMediaCollection();
+        if($request->has('image')) {
+            $article->addMediaFromRequest('image')->toMediaCollection();
+        }
 
-        return redirect()->route('articles.index');
+        return redirect()->route('home.articles.index');
     }
 
     public function edit($id)
@@ -68,6 +71,16 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
-        return redirect()->route('articles.show', $article->id);
+        $validated = $request->validate([
+            'image' => ['nullable', 'file', 'image'],
+        ]);
+
+        // Replace the article image if a new one is uploaded
+        if($request->has('image')) {
+            $article->media()->first()?->delete();
+            $article->addMediaFromRequest('image')->toMediaCollection();
+        }
+
+        return redirect()->route('home.articles.show', $article->id);
     }
 }
