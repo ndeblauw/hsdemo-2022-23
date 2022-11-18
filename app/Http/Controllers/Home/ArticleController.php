@@ -71,6 +71,22 @@ class ArticleController extends Controller
 
         $article->update($validated);
 
+        // deal with keywords
+        $validated = $request->validate([
+            'keywords' => ['nullable', 'string'],
+        ]);
+
+        $keywords = collect(explode(',',$validated['keywords']))->map( fn($k) => ucfirst(trim($k)));
+
+        $key_list = [];
+        foreach($keywords as $keyword) {
+            $key_list[] = \App\Models\Keyword::firstOrCreate(['name' => $keyword]);
+        }
+        $key_list = collect($key_list);
+
+        $article->keywords()->sync($key_list->pluck('id'));
+
+        // deal with media file
         $validated = $request->validate([
             'image' => ['nullable', 'file', 'image'],
         ]);
