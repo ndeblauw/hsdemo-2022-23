@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::paginate(10);
+        $articles = Article::editableByLoggedInUser()->paginate(10);
 
         $articles->load('author');
 
@@ -57,12 +57,23 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
+        //abort_if(!$article->canEdit(), 403);
+
+        if(! $article->canEdit() ) {
+            return redirect()->back();
+        }
+
         return view('home.articles.edit', compact('article'));
     }
 
     public function update($id, Request $request)
     {
         $article = Article::find($id);
+
+        if(! $article->canEdit() ) {
+            return redirect()->back();
+        }
+
 
         $validated = $request->validate([
             'title' => ['required', 'min:5', 'max:255'],

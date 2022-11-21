@@ -60,13 +60,16 @@ class User extends Authenticatable
         });
     }
 
+    // Model relations -----------------------------
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
-    public function articles()
-    {
-        return $this->hasMany(Article::class, 'author_id');
-    }
+
 }

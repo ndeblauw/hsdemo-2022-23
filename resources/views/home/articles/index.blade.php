@@ -37,8 +37,10 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{$article->title}}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$article->author->name}}</td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a href="{{route('home.articles.show', $article->id)}}" class="text-green-600 hover:text-green-900 mr-2">Details</a>                                  </a>
+                                        <a href="{{route('home.articles.show', $article->id)}}" class="text-green-600 hover:text-green-900 mr-2">Details</a>
+                                        @if( $article->canEdit() )
                                         <a href="{{route('home.articles.edit', $article->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

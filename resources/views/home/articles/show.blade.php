@@ -1,8 +1,10 @@
 <x-app-layout title="Read {{$article->title}}">
 
+    @if( $article->canEdit() )
     <div class="mb-6 flex justify-end">
         <a href="{{route('home.articles.edit', $article->id)}}" class="p-2 bg-green-500 text-green-50 rounded-lg">edit</a>
     </div>
+    @endif
 
 
     <h1 class="font-semibold">{{$article->title}}</h1>
