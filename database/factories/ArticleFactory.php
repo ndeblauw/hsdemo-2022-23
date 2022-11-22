@@ -35,6 +35,4 @@ class ArticleFactory extends Factory
                 ->toMediaCollection();
         });
     }
-
-
 }

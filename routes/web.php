@@ -16,7 +16,6 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('home')->name('home.')->group(function () {
     Route::resource('articles', \App\Http\Controllers\Home\ArticleController::class);
-
 });
 
 // ADMIN ROUTES ===========================================================

@@ -22,6 +22,7 @@ class ArticleController extends Controller
         $article->load('media', 'author', 'keywords');
 
         ray($article);
+
         return view('home.articles.show', compact('article'));
     }
 
@@ -46,7 +47,7 @@ class ArticleController extends Controller
             'tag_id' => 1,
         ]);
 
-        if($request->has('image')) {
+        if ($request->has('image')) {
             $article->addMediaFromRequest('image')->toMediaCollection();
         }
 
@@ -59,7 +60,7 @@ class ArticleController extends Controller
 
         //abort_if(!$article->canEdit(), 403);
 
-        if(! $article->canEdit() ) {
+        if (! $article->canEdit()) {
             return redirect()->back();
         }
 
@@ -70,10 +71,9 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        if(! $article->canEdit() ) {
+        if (! $article->canEdit()) {
             return redirect()->back();
         }
-
 
         $validated = $request->validate([
             'title' => ['required', 'min:5', 'max:255'],
@@ -87,10 +87,10 @@ class ArticleController extends Controller
             'keywords' => ['nullable', 'string'],
         ]);
 
-        $keywords = collect(explode(',',$validated['keywords']))->map( fn($k) => ucfirst(trim($k)));
+        $keywords = collect(explode(',', $validated['keywords']))->map(fn ($k) => ucfirst(trim($k)));
 
         $key_list = [];
-        foreach($keywords as $keyword) {
+        foreach ($keywords as $keyword) {
             $key_list[] = \App\Models\Keyword::firstOrCreate(['name' => $keyword]);
         }
         $key_list = collect($key_list);
@@ -103,7 +103,7 @@ class ArticleController extends Controller
         ]);
 
         // Replace the article image if a new one is uploaded
-        if($request->has('image')) {
+        if ($request->has('image')) {
             $article->media()->first()?->delete();
             $article->addMediaFromRequest('image')->toMediaCollection();
         }
