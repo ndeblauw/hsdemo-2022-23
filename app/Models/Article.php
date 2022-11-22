@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -29,6 +30,13 @@ class Article extends Model implements HasMedia
     public function getAgeAttribute(): string
     {
         return $this->published_at->diffInDays().' days';
+    }
+
+    protected static function booted()
+    {
+        static::saved(function ($article) {
+            Cache::forget('welcome.articles');
+        });
     }
 
     // Model Relations ---------------------------------------------------------
