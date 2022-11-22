@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Article extends Model implements HasMedia
@@ -24,7 +23,7 @@ class Article extends Model implements HasMedia
     // Custom attributes ------------------------------------------------------
     public function getSummaryAttribute()
     {
-        return $this->title. ' by '.$this->author->name;
+        return $this->title.' by '.$this->author->name;
     }
 
     public function getAgeAttribute(): string
@@ -51,7 +50,7 @@ class Article extends Model implements HasMedia
 
     public function scopeEditableByLoggedInUser($query)
     {
-        if(auth()->user()->is_admin) {
+        if (auth()->user()->is_admin) {
             return $query;
         }
 
@@ -62,12 +61,12 @@ class Article extends Model implements HasMedia
     public function canEdit(?int $user_id = null)
     {
         // admins can always edit
-        if(auth()->user()->is_admin) {
+        if (auth()->user()->is_admin) {
             return true;
         }
 
         // If no user is given, use the logged in user
-        if($user_id === null) {
+        if ($user_id === null) {
             $user_id = auth()->id();
         }
 
