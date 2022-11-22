@@ -2,23 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 
-// PUBLIC ROUTES =========================================================
-Route::get('/', \App\Http\Controllers\WelcomeController::class)->name('welcome');
-Route::resource('users', \App\Http\Controllers\UserController::class)->only('index', 'show');
-Route::resource('articles', \App\Http\Controllers\ArticleController::class)->only('index', 'show');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-require __DIR__.'/auth.php';
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// LOGGED IN ROUTES ======================================================
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->prefix('home')->name('home.')->group(function () {
-    Route::resource('articles', \App\Http\Controllers\Home\ArticleController::class);
 });
 
-// ADMIN ROUTES ===========================================================
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-    // admin routes come here
-});
+require __DIR__.'/auth.php';
