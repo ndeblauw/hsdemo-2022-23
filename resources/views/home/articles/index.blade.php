@@ -6,6 +6,12 @@
         </h2>
     </x-slot>
 
+    @if(session()->has('success_message'))
+        <div class="bg-green-50 text-green-500 rounded p-4 mb-4">
+            Your article has been saved successfully!
+        </div>
+    @endif
+
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">

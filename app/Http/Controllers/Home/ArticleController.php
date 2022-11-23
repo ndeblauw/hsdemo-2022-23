@@ -43,13 +43,15 @@ class ArticleController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'published_at' => now(),
-            'author_id' => 1,
+            'author_id' => auth()->id(),
             'tag_id' => 1,
         ]);
 
         if ($request->has('image')) {
             $article->addMediaFromRequest('image')->toMediaCollection();
         }
+
+        session()->flash('success_message', 'Article created successfully');
 
         return redirect()->route('home.articles.index');
     }
