@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendWelcomeMail;
 use App\Models\Article;
 use App\Models\User;
 use App\Notifications\WelcomeToNewUserNotification;
@@ -47,8 +48,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $latest_articles = Article::latest()->take(2)->get();
-        $user->notify(new WelcomeToNewUserNotification($latest_articles));
+        SendWelcomeMail::dispatch($user);
 
         event(new Registered($user));
 
