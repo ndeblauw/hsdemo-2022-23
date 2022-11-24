@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'cache_ttl' => env('CACHE_TTL', 200),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
