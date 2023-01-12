@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:run --db-only')->dailyAt('10:00')->timezone('Europe/Brussels');
-        $schedule->command('backup:run')->dailyAt('22:00')->timezone('Europe/Brussels');
+        $schedule->command('backup:run --only-db')->dailyAt('11:05')->timezone('Europe/Brussels');
+        $schedule->command('backup:run')->dailyAt('23:05')->timezone('Europe/Brussels');
     }
 
     /**
