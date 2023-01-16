@@ -13,6 +13,12 @@
 
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    @if($uses_livewire)
+        @livewireStyles
+    @endif
+
+    @stack('head')
 </head>
 <body class="antialiased">
 
@@ -37,5 +43,11 @@
 
 <x-footer/>
 
+
+    @stack('footer')
+
+    @if($uses_livewire)
+        @livewireScripts
+    @endif
 </body>
 </html>

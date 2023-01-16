@@ -8,6 +8,8 @@ Route::get('/', \App\Http\Controllers\WelcomeController::class)->name('welcome')
 Route::resource('users', \App\Http\Controllers\UserController::class)->only('index', 'show');
 Route::resource('articles', \App\Http\Controllers\ArticleController::class)->only('index', 'show');
 
+Route::get('/livewiretest', \App\Http\Controllers\LivewireTestController::class)->name('livewiretest');
+
 require __DIR__.'/auth.php';
 
 // LOGGED IN ROUTES ======================================================
