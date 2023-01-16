@@ -13,7 +13,7 @@ class SiteLayout extends Component
      */
     public function __construct(
         public string $title = 'MySite',
-        public bool $uses_livewire = false,
+        public bool $uses_livewire = true,
     ) {
     }
 
@@ -24,6 +24,7 @@ class SiteLayout extends Component
      */
     public function render()
     {
+        ray($this->uses_livewire);
         return view('components.site-layout');
     }
 }

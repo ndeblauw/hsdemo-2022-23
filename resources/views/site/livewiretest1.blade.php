@@ -1,6 +1,9 @@
 <x-site-layout :uses_livewire="true">
 
-Does it include it?
+    <livewire:counter counter="10"/>
+
+
+    <livewire:article-search/>
 
 
 
