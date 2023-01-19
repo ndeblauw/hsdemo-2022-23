@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(Article::class, 'owner_id');
+    }
 }

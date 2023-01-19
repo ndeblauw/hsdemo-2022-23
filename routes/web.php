@@ -17,8 +17,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('articles/{article}/buy/{amount}', [\App\Http\Controllers\BuyArticleController::class, 'preparePayment'])->middleware('auth')->name('prepare-payment');
+Route::get('articles/{article}/success', [\App\Http\Controllers\BuyArticleController::class, 'successfulPayment'])->name('order.success');
+
 Route::middleware(['auth', 'verified'])->prefix('home')->name('home.')->group(function () {
     Route::resource('articles', \App\Http\Controllers\Home\ArticleController::class);
+
 });
 
 Route::middleware('auth')->group(function () {

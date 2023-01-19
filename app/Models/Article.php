@@ -55,6 +55,11 @@ class Article extends Model implements HasMedia
         return $this->belongsToMany(Keyword::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
     // Scopes --------------------------------------------------------------------
     public function scopeOutdated($query, $days = 20)
     {
