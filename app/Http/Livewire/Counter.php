@@ -16,13 +16,21 @@ class Counter extends Component
         $this->article = Article::find($this->counter);
     }
 
-    public function decrement()
+    public function decrement(int $diff)
     {
-        $this->counter--;
+        $this->counter -= $diff;
     }
 
     public function render()
     {
+        if($this->counter > 99) {
+            $this->counter *= 2;
+        }
+
+        if($this->counter > 202) {
+            $this->emit('myCrazyEvent');
+        }
+
         return view('livewire.counter');
     }
 }

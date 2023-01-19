@@ -9,6 +9,15 @@ class ArticleSearch extends Component
 {
     public $search = '';
 
+    public $background_color = 'EEEEEE';
+
+    public $listeners = ['myCrazyEvent' => 'changeBackgroundColor'];
+
+    public function changeBackgroundColor()
+    {
+        $this->background_color = sprintf('%06X', mt_rand(0, 0xFFFFFF));
+    }
+
 
     public function search()
     {
@@ -23,16 +32,4 @@ class ArticleSearch extends Component
     }
 }
 
-/*
-public $background_color = 'EEEEEE';
-
-public $listeners = ['myCrazyEvent' => 'changeBackgroundColor'];
-
-public function changeBackgroundColor()
-{
-    $this->background_color = sprintf('%06X', mt_rand(0, 0xFFFFFF));
-}
-
-// style="background-color:#{{$background_color}};"
-*/
 

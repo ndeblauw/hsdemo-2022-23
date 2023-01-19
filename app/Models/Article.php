@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -34,6 +35,10 @@ class Article extends Model implements HasMedia
 
     protected static function booted()
     {
+        static::creating(function ($article) {
+            $article->uuid = Str::uuid()->toString();
+        });
+
         static::saved(function ($article) {
             Cache::forget('welcome.articles');
         });
