@@ -11,4 +11,10 @@
 |
 */
 
+Route::middleware(['auth:sanctum'])->group( function() {
+    Route::get('articles', [\App\Http\Controllers\Api\ArticleController::class, 'index'])->name('articles.index');
+    Route::get('articles/{article}', [\App\Http\Controllers\Api\ArticleController::class, 'show'])->name('articles.show');
+    Route::post('articles', [\App\Http\Controllers\Api\ArticleController::class, 'store'])->name('articles.store');
+});
+
 Route::post('mollie', [\App\Http\Controllers\BuyArticleController::class, 'webhook'])->name('mollie-webhook');
