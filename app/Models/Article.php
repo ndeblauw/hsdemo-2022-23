@@ -25,7 +25,7 @@ class Article extends Model implements HasMedia
     // Custom attributes ------------------------------------------------------
     public function getSummaryAttribute()
     {
-        return $this->title.' by '.$this->author->name;
+        return $this->title.' by '.$this->author_id;
     }
 
     public function getAgeAttribute(): string
