@@ -23,6 +23,8 @@ class WelcomeController extends Controller
             return Article::count();
         });
 
+        abort(404);
+
         return view('welcome', compact('users', 'articles', 'articles_count'));
     }
 }
